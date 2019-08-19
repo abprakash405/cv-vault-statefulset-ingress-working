@@ -1,0 +1,21 @@
+cd consul
+docker build -t consul .
+docker tag consul your-repo
+dokcer push your-repo 
+
+cd vault 
+docker build -t vault .
+docker tag vault your-repo
+docker push your-repo 
+
+cd k8-files
+kubectl apply -f consul-service.yml 
+kubectl apply -f vault-service.yml 
+
+kubectl apply -f consul-statefulset.yml 
+kubectl apply -f vault-deployment.yml 
+
+kubectl apply -f consul-lb.yml 
+
+
+
